@@ -4,6 +4,7 @@
 
 #include "Components/SceneComponent.h"
 #include "ProceduralMeshComponent.h"
+#include "FSectionGeometry.h"
 #include "DeformMeshComponent.generated.h"
 
 
