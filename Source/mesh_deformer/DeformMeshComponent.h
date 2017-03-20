@@ -26,7 +26,7 @@ public:
 
 	// Rebuild the PMC
 	UFUNCTION(BlueprintCallable, Category = DeformMeshComponent)
-		void Rebuild();
+		void Rebuild(bool createCollision = false);
 
 protected:
 public:	
