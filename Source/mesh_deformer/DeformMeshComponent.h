@@ -30,6 +30,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = DeformMeshComponent)
 		void Rebuild(bool createCollision = false);
 
+	// Pull out the geometry of the mesh so we're able to modify it
+	UFUNCTION(BlueprintCallable, Category = DeformMeshComponent)
+		FMeshGeometry GetMeshGeometry(int32 LOD=0);
+
 protected:
 public:	
 };

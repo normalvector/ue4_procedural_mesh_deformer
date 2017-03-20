@@ -51,8 +51,6 @@ void UDeformMeshComponent::Rebuild(bool createCollision) {
 
 	for (int meshSectionIndex = 0; meshSectionIndex < numSections; ++meshSectionIndex) {
 		UE_LOG(LogTemp, Log, TEXT("DeformMeshComponent rebuilding section %d"), meshSectionIndex);
-		//  static void GetSectionFromStaticMesh(UStaticMesh* InMesh, int32 LODIndex, int32 SectionIndex, TArray<FVector>& Vertices, TArray<int32>& Triangles, TArray<FVector>& Normals,
-		// TArray<FVector2D>& UVs, TArray<FProcMeshTangent>& Tangents);
 
 		UKismetProceduralMeshLibrary::GetSectionFromStaticMesh(
 			StaticMesh, LOD, meshSectionIndex,
@@ -70,3 +68,32 @@ void UDeformMeshComponent::Rebuild(bool createCollision) {
 	}
 }
 
+// Get the mesh geometry
+FMeshGeometry UDeformMeshComponent::GetMeshGeometry(int32 LOD) {
+	FMeshGeometry meshGeometry;
+
+	const int32 numSections = StaticMesh->GetNumSections(LOD);
+	UE_LOG(LogTemp, Log, TEXT("Found %d sections for LOD %d"), numSections, LOD);
+
+	for (int meshSectionIndex = 0; meshSectionIndex < numSections; ++meshSectionIndex) {
+		UE_LOG(LogTemp, Log, TEXT("DeformMeshComponent rebuilding section %d"), meshSectionIndex);
+		// Create the geometry for the section
+		FSectionGeometry sectionGeometry;
+
+		// Copy the static mesh's geometry for the section to the struct.
+		UKismetProceduralMeshLibrary::GetSectionFromStaticMesh(
+			StaticMesh, LOD, meshSectionIndex,
+			sectionGeometry.vertices, sectionGeometry.triangles,
+			sectionGeometry.normals, sectionGeometry.uvs, sectionGeometry.tangents
+		);
+		UE_LOG(LogTemp, Log, TEXT("Found %d verts and %d triangles"), sectionGeometry.vertices.Num(), sectionGeometry.triangles.Num() / 3);
+
+		// Load vertex colors with default values for as many vertices as needed
+		sectionGeometry.vertexColors.InsertDefaulted(0, sectionGeometry.vertices.Num());
+
+		// Add the finished struct to the mesh's section list
+		meshGeometry.sections.Emplace(sectionGeometry);
+	}
+
+	return meshGeometry;
+}
