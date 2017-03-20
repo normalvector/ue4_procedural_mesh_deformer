@@ -1,0 +1,15 @@
+TODO LIST
+
+Selector Weights
+  * Select All
+  * Select Linear (Plane, MinRange, MaxRange)
+  * Select Radial (Centre, MinRadius, MaxRadius)
+  * Gamma functions
+  * Add Selection
+  * Multiply Selection
+  * Subtract Selection
+  * Invert Selection
+
+Error Checking
+  * No CPU Access on Mesh
+  
