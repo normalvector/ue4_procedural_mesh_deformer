@@ -6,6 +6,7 @@
 #include "ProceduralMeshComponent.h"
 #include "FMeshGeometry.h"
 #include "FSectionGeometry.h"
+#include "SelectionSetBPFunctionLibrary.h"
 #include "DeformMeshComponent.generated.h"
 
 
@@ -32,7 +33,7 @@ public:
 
 	// Pull out the geometry of the mesh so we're able to modify it
 	UFUNCTION(BlueprintCallable, Category = DeformMeshComponent)
-		FMeshGeometry GetMeshGeometry(int32 LOD=0);
+		FMeshGeometry GetStaticMeshGeometry(int32 LOD=0);
 
 protected:
 public:	

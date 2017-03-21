@@ -69,7 +69,7 @@ void UDeformMeshComponent::Rebuild(bool createCollision) {
 }
 
 // Get the mesh geometry
-FMeshGeometry UDeformMeshComponent::GetMeshGeometry(int32 LOD) {
+FMeshGeometry UDeformMeshComponent::GetStaticMeshGeometry(int32 LOD) {
 	FMeshGeometry meshGeometry;
 
 	const int32 numSections = StaticMesh->GetNumSections(LOD);
